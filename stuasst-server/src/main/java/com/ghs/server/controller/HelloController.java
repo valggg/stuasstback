@@ -12,4 +12,14 @@ public class HelloController {
     public String hello(){
         return "hello";
     }
+
+    @GetMapping("/system/config/hello")
+    public String hello2(){
+        return "/system/config/hello";
+    }
+
+    @GetMapping("/timetable/show/hello")
+    public String hello3(){
+        return "/timetable/show/hello";
+    }
 }
