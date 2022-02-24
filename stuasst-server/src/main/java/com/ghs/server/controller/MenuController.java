@@ -29,4 +29,5 @@ public class MenuController {
     @GetMapping("/menu")
     public List<Menu> getMenusByAdminId(){
         return menuService.getMenusByAdminId();
-    }}
+    }
+}

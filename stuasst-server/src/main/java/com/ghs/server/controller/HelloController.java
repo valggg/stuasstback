@@ -18,8 +18,8 @@ public class HelloController {
         return "/system/config/hello";
     }
 
-    @GetMapping("/timetable/show/hello")
+    @GetMapping("/course/showTab/hello")
     public String hello3(){
-        return "/timetable/show/hello";
+        return "/course/showTab/hello";
     }
 }

@@ -1,10 +1,7 @@
 package com.ghs.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.ghs.server.pojo.Admin;
-import com.ghs.server.pojo.Menu;
-import com.ghs.server.pojo.RespBean;
-import com.ghs.server.pojo.Role;
+import com.ghs.server.pojo.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -42,4 +39,10 @@ public interface IAdminService extends IService<Admin> {
      */
     List<Role> getRoles(Integer adminId);
 
+    /**
+     * 根据用户id查询课程表
+     * @param adminId
+     * @return
+     */
+    List<Course> getCourses(Integer adminId);
 }
