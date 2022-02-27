@@ -2,6 +2,7 @@ package com.ghs.server.mapper;
 
 import com.ghs.server.pojo.Course;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -27,9 +28,10 @@ public interface CourseMapper extends BaseMapper<Course> {
      */
     void addCourse(Course course);
 
-    /**
-     * 删除课程
-     * @param course
-     */
-    void deleteCourse(Course course);
+//    /**
+//     * 删除课程
+//     * @param course
+//     */
+//    void deleteCourse(Course course);
+
 }

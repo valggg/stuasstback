@@ -26,7 +26,7 @@ public class CourseController {
     @Autowired
     private ICourseService courseService;
 
-    @ApiModelProperty(value = "通过用户id查询课程表")
+    @ApiOperation(value = "通过用户id查询课程表")
     @GetMapping("/showTab")
     public List<Course> getCoursesByAdminId(){
         return courseService.getCoursesByAdminId();
@@ -39,9 +39,22 @@ public class CourseController {
     }
 
     @ApiOperation(value = "删除课程")
-    @PostMapping("/{id}")
+    @DeleteMapping("/{id}")
     public RespBean deleteCourse(@PathVariable Integer id){
-        return courseService.deleteCourse(id);
+        if (courseService.removeById(id)) {
+            return RespBean.success("删除成功！");
+        }
+        return RespBean.error("删除失败！");
+
+    }
+
+    @ApiOperation(value = "更新课程")
+    @PutMapping("/")
+    public RespBean updateCourse(@RequestBody Course course){
+        if (courseService.updateById(course)) {
+            return RespBean.success("更新成功！");
+        }
+        return RespBean.error("更新失败！");
     }
 
 }

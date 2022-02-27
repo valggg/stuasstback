@@ -49,18 +49,19 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         return RespBean.error("添加失败，请稍后再试！");
     }
 
-    /**
-     * 删除课程
-     * @param id
-     * @return
-     */
-    public RespBean deleteCourse(Integer id){
-        Course course = new Course();
-        course.setId(id);
-        if (1 == course.getResult()){
-            return RespBean.success("删除成功");
-        }
-        return RespBean.error("删除失败，请稍后再试！");
-    }
+//    /**
+//     * 删除课程
+//     * @param id
+//     * @return
+//     */
+//    public RespBean deleteCourse(Integer id){
+//        Course course = new Course();
+//        course.setId(id);
+//        courseMapper.deleteCourse(course);
+//        if (1 == course.getResult()){
+//            return RespBean.success("删除成功");
+//        }
+//        return RespBean.error("删除失败，请稍后再试！");
+//    }
 
 }
