@@ -44,8 +44,11 @@ public class Course implements Serializable {
     @ApiModelProperty(value = "课程周数")
     private String weeks;
 
-    @ApiModelProperty(value = "坐标")
-    private String coord;
+    @ApiModelProperty(value = "课程所在节数")
+    private String tabNo;
+
+    @ApiModelProperty(value = "课程所在周数")
+    private String tabWeek;
 
     @ApiModelProperty(value = "颜色")
     private String color;

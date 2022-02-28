@@ -36,8 +36,8 @@
     <!--添加部门-->
     <select id="addCourse" statementType="CALLABLE">
         call addCourse(#{name,mode=IN,jdbcType=VARCHAR},#{teacher,mode=IN,jdbcType=VARCHAR},
-            #{address,mode=IN,jdbcType=VARCHAR},#{weeks,mode=IN,jdbcType=VARCHAR},#{coord,mode=IN,jdbcType=VARCHAR},
-            #{color,mode=IN,jdbcType=VARCHAR},#{result,mode=OUT,jdbcType=INTEGER})
+            #{address,mode=IN,jdbcType=VARCHAR},#{weeks,mode=IN,jdbcType=VARCHAR},#{tabNo,mode=IN,jdbcType=VARCHAR},
+            #{tabWeek,mode=IN,jdbcType=VARCHAR},#{color,mode=IN,jdbcType=VARCHAR},#{result,mode=OUT,jdbcType=INTEGER})
     </select>
 
     <select id="deleteCourse" statementType="CALLABLE">
