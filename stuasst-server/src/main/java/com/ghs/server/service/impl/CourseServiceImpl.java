@@ -26,7 +26,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Autowired
     private CourseMapper courseMapper;
     /**
-     * 通过用户id查询课程表
+     * 通过用户id查询课程
      * @return
      */
     @Override

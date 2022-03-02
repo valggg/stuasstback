@@ -19,7 +19,7 @@
     </sql>
 
 
-    <!--根据用户id查询课程表-->
+    <!--根据用户id查询课程-->
     <select id="getCourses" resultType="com.ghs.server.pojo.Course">
         SELECT
             c.*

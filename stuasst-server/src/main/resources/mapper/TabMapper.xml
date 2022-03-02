@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ghs.server.mapper.TabMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ghs.server.pojo.Tab">
+        <id column="id" property="id" />
+        <result column="beginDate" property="beginDate" />
+        <result column="allWeek" property="allWeek" />
+        <result column="allTime" property="allTime" />
+        <result column="everyTimes" property="everyTimes" />
+        <result column="adminId" property="adminId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, beginDate, allWeek, allTime, everyTimes, adminId
+    </sql>
+
+    <select id="getTabByAdminId" resultType="com.ghs.server.pojo.Tab">
+        SELECT * FROM s_tab WHERE adminId=#{adminId}
+    </select>
+
+    <select id="addTab" statementType="CALLABLE">
+        call addTab(#{beginDate,mode=IN,jdbcType=VARCHAR},#{allWeek,mode=IN,jdbcType=VARCHAR},
+            #{allTime,mode=IN,jdbcType=VARCHAR},#{everyTimes,mode=IN,jdbcType=VARCHAR},
+            #{adminId,mode=IN,jdbcType=VARCHAR},#{result,mode=OUT,jdbcType=INTEGER})
+    </select>
+
+    <select id="deleteTab" statementType="CALLABLE">
+        call delTab(#{id,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
+    </select>
+</mapper>

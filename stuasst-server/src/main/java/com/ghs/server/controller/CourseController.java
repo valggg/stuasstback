@@ -3,8 +3,9 @@ package com.ghs.server.controller;
 
 import com.ghs.server.pojo.Course;
 import com.ghs.server.pojo.RespBean;
+import com.ghs.server.pojo.Tab;
 import com.ghs.server.service.ICourseService;
-import io.swagger.annotations.ApiModelProperty;
+import com.ghs.server.service.ITabService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +26,11 @@ public class CourseController {
 
     @Autowired
     private ICourseService courseService;
+    @Autowired
+    private ITabService tabService;
 
-    @ApiOperation(value = "通过用户id查询课程表")
-    @GetMapping("/showTab")
+    @ApiOperation(value = "通过用户id查询课程")
+    @GetMapping("/showCou")
     public List<Course> getCoursesByAdminId(){
         return courseService.getCoursesByAdminId();
     }
@@ -45,7 +48,6 @@ public class CourseController {
             return RespBean.success("删除成功！");
         }
         return RespBean.error("删除失败！");
-
     }
 
     @ApiOperation(value = "更新课程")
@@ -57,4 +59,16 @@ public class CourseController {
         return RespBean.error("更新失败！");
     }
 
+    @ApiOperation(value = "通过用户id查询课程表信息")
+    @GetMapping("/tab/{id}")
+    public List<Tab> getTabByAdminId(@PathVariable Integer id){
+        return tabService.getTabByAdminId(id);
+    }
+
+    @ApiOperation(value = "新建课程表")
+    @PostMapping("/tab")
+    public RespBean addTab(@RequestBody Tab tab){
+        return tabService.addTab(tab);
+    }
 }
+

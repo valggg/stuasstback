@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface CourseMapper extends BaseMapper<Course> {
     /**
-     * 根据用户id查询课程表
+     * 根据用户id查询课程
      * @param adminId
      * @return
      */
