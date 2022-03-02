@@ -42,6 +42,10 @@ public class TabServiceImpl extends ServiceImpl<TabMapper, Tab> implements ITabS
      */
     @Override
     public RespBean addTab(Tab tab) {
-        return tabMapper.addTab(tab);
+        tabMapper.addTab(tab);
+        if (1 == tab.getResult()){
+            return RespBean.success("添加成功",tab);
+        }
+        return RespBean.error("添加失败，请稍后再试！");
     }
 }

@@ -28,5 +28,5 @@ public interface TabMapper extends BaseMapper<Tab> {
      * @param tab
      * @return
      */
-    RespBean addTab(Tab tab);
+    void addTab(Tab tab);
 }
