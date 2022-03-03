@@ -31,7 +31,7 @@ public class TabServiceImpl extends ServiceImpl<TabMapper, Tab> implements ITabS
      * @return
      */
     @Override
-    public List<Tab> getTabByAdminId(Integer adminId) {
+    public Tab getTabByAdminId(Integer adminId) {
         return tabMapper.getTabByAdminId(adminId);
     }
 

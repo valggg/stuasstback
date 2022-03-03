@@ -4,6 +4,7 @@ package com.ghs.server.controller;
 import com.ghs.server.pojo.Course;
 import com.ghs.server.pojo.RespBean;
 import com.ghs.server.pojo.Tab;
+import com.ghs.server.service.IAdminCourseService;
 import com.ghs.server.service.ICourseService;
 import com.ghs.server.service.ITabService;
 import io.swagger.annotations.ApiOperation;
@@ -28,10 +29,12 @@ public class CourseController {
     private ICourseService courseService;
     @Autowired
     private ITabService tabService;
+    @Autowired
+    private IAdminCourseService adminCourseService;
 
     @ApiOperation(value = "通过用户id查询课程表信息")
     @GetMapping("/tab/{id}")
-    public List<Tab> getTabByAdminId(@PathVariable Integer id){
+    public Tab getTabByAdminId(@PathVariable Integer id){
         return tabService.getTabByAdminId(id);
     }
 
@@ -75,6 +78,7 @@ public class CourseController {
     @DeleteMapping("/{id}")
     public RespBean deleteCourse(@PathVariable Integer id){
         if (courseService.removeById(id)) {
+            adminCourseService.delAdminCourseByCid(id);
             return RespBean.success("删除成功！");
         }
         return RespBean.error("删除失败！");

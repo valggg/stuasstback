@@ -33,13 +33,15 @@
             ac.adminId = #{adminId}
     </select>
 
-    <!--添加部门-->
+    <!--添加课程-->
     <select id="addCourse" statementType="CALLABLE">
         call addCourse(#{name,mode=IN,jdbcType=VARCHAR},#{teacher,mode=IN,jdbcType=VARCHAR},
             #{address,mode=IN,jdbcType=VARCHAR},#{weeks,mode=IN,jdbcType=VARCHAR},#{tabNo,mode=IN,jdbcType=VARCHAR},
-            #{tabWeek,mode=IN,jdbcType=VARCHAR},#{color,mode=IN,jdbcType=VARCHAR},#{result,mode=OUT,jdbcType=INTEGER})
+            #{tabWeek,mode=IN,jdbcType=VARCHAR},#{color,mode=IN,jdbcType=VARCHAR},#{result,mode=OUT,jdbcType=INTEGER},
+            #{reId,mode=OUT,jdbcType=INTEGER})
     </select>
 
+    <!--删除课程-->
     <select id="deleteCourse" statementType="CALLABLE">
         call delCourse(#{id,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
     </select>

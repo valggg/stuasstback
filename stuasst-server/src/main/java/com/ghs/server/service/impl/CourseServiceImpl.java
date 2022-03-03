@@ -1,6 +1,8 @@
 package com.ghs.server.service.impl;
 
+import com.ghs.server.mapper.AdminCourseMapper;
 import com.ghs.server.pojo.Admin;
+import com.ghs.server.pojo.AdminCourse;
 import com.ghs.server.pojo.Course;
 import com.ghs.server.mapper.CourseMapper;
 import com.ghs.server.pojo.RespBean;
@@ -25,6 +27,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Autowired
     private CourseMapper courseMapper;
+    @Autowired
+    private AdminCourseMapper adminCourseMapper;
+
     /**
      * 通过用户id查询课程
      * @return
@@ -43,7 +48,13 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public RespBean addCourse(Course course) {
         courseMapper.addCourse(course);
+        Integer adminId = ((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         if (1 == course.getResult()){
+            AdminCourse adminCourse = new AdminCourse();
+            adminCourse.setId(0);
+            adminCourse.setAdminId(adminId);
+            adminCourse.setCid(course.getReId());
+            adminCourseMapper.addAdminCourse(adminCourse);
             return RespBean.success("添加成功",course);
         }
         return RespBean.error("添加失败，请稍后再试！");

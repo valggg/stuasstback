@@ -2,6 +2,7 @@ package com.ghs.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ghs.server.pojo.AdminCourse;
+import com.ghs.server.pojo.RespBean;
 
 /**
  * <p>
@@ -13,4 +14,10 @@ import com.ghs.server.pojo.AdminCourse;
  */
 public interface IAdminCourseService extends IService<AdminCourse> {
 
+    /**
+     * 根据课程id删除用户-课程关系
+     * @param cid
+     * @return
+     */
+    void delAdminCourseByCid(Integer cid);
 }

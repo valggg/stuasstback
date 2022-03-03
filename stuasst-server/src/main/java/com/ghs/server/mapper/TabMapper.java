@@ -21,7 +21,7 @@ public interface TabMapper extends BaseMapper<Tab> {
      * @param adminId
      * @return
      */
-    List<Tab> getTabByAdminId(Integer adminId);
+    Tab getTabByAdminId(Integer adminId);
 
     /**
      * 新建课程表

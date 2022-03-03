@@ -22,7 +22,7 @@ public interface ITabService extends IService<Tab> {
      * @param adminId
      * @return
      */
-    List<Tab> getTabByAdminId(Integer adminId);
+    Tab getTabByAdminId(Integer adminId);
 
     /**
      * 新建课程表
@@ -30,4 +30,5 @@ public interface ITabService extends IService<Tab> {
      * @return
      */
     RespBean addTab(Tab tab);
+
 }

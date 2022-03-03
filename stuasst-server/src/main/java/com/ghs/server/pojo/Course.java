@@ -57,4 +57,8 @@ public class Course implements Serializable {
     @TableField(exist = false)
     private Integer result;
 
+    @ApiModelProperty(value = "返回插入id，供存储过程使用")
+    @TableField(exist = false)
+    private Integer reId;
+
 }
