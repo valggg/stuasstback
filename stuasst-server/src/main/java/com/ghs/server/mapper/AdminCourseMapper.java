@@ -2,6 +2,7 @@ package com.ghs.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ghs.server.pojo.AdminCourse;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -12,6 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * @author ghs
  * @since 2022-03-02
  */
+@Mapper
 public interface AdminCourseMapper extends BaseMapper<AdminCourse> {
 
     /**

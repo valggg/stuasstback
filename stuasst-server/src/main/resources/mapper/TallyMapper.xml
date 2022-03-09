@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ghs.server.mapper.TallyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.ghs.server.pojo.Tally">
+        <id column="id" property="id" />
+        <result column="date" property="date" />
+        <result column="type" property="type" />
+        <result column="remark" property="remark" />
+        <result column="money" property="money" />
+        <result column="isIncome" property="isIncome" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, date, type, remark, money, isIncome
+    </sql>
+
+    <!--根据用户id查询账单-->
+    <select id="getTallies" resultType="com.ghs.server.pojo.Tally">
+        SELECT
+            t.*
+        FROM
+            s_tally t
+                LEFT JOIN
+            s_admin_tally at
+            ON
+                t.id = at.tid
+        WHERE
+            at.adminId = #{adminId}
+    </select>
+
+    <!--添加账单-->
+    <select id="addTally" statementType="CALLABLE">
+        call addTally(#{date,mode=IN,jdbcType=VARCHAR},#{type,mode=IN,jdbcType=VARCHAR},
+            #{remark,mode=IN,jdbcType=VARCHAR},#{money,mode=IN,jdbcType=FLOAT},#{isIncome,mode=IN,jdbcType=TINYINT},
+            #{result,mode=OUT,jdbcType=INTEGER},#{reId,mode=OUT,jdbcType=INTEGER})
+    </select>
+
+    <!--删除账单-->
+    <select id="deleteTally" statementType="CALLABLE">
+        call delTally(#{id,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
+    </select>
+
+    <!--根据用户id查询收入/支出账单-->
+    <select id="getInAndOut" resultType="com.ghs.server.pojo.Tally">
+        SELECT
+            DATE_FORMAT( date, '%Y/%m' ) AS time,
+	        SUM( money ) AS money,
+	type
+        FROM
+            (
+            SELECT
+            t.type,
+            t.money,
+            t.date
+            FROM
+            s_tally t
+            LEFT JOIN s_admin_tally AT ON t.id = AT.tid
+            WHERE
+            AT.adminId = #{adminId}
+            AND t.isIncome = #{isIncome}
+            ) new
+        GROUP BY
+            time,
+            type
+    </select>
+</mapper>

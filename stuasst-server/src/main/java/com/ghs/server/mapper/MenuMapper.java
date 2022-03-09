@@ -2,6 +2,7 @@ package com.ghs.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ghs.server.pojo.Menu;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * @author ghs
  * @since 2022-02-11
  */
+@Mapper
 public interface MenuMapper extends BaseMapper<Menu> {
 
     /**

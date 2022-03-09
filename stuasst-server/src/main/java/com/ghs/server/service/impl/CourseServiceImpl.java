@@ -8,6 +8,8 @@ import com.ghs.server.mapper.CourseMapper;
 import com.ghs.server.pojo.RespBean;
 import com.ghs.server.service.ICourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

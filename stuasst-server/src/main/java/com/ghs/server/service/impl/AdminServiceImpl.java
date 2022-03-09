@@ -4,21 +4,22 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ghs.server.config.security.component.JwtTokenUtil;
 import com.ghs.server.mapper.AdminMapper;
+import com.ghs.server.mapper.AdminRoleMapper;
 import com.ghs.server.mapper.CourseMapper;
 import com.ghs.server.mapper.RoleMapper;
-import com.ghs.server.pojo.Admin;
-import com.ghs.server.pojo.Course;
-import com.ghs.server.pojo.Role;
+import com.ghs.server.pojo.*;
 import com.ghs.server.service.IAdminService;
-import com.ghs.server.pojo.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +52,8 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     private RoleMapper roleMapper;
     @Autowired
     private CourseMapper courseMapper;
+    @Autowired
+    private AdminRoleMapper adminRoleMapper;
 
     /**
      * 登录之后返回token
@@ -120,5 +123,102 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         return courseMapper.getCourses(adminId);
     }
 
+    /**
+     * 通过userDetails生成token
+     *
+     * @param userDetails
+     * @return
+     */
+    private Map<String, String> generateToken(UserDetails userDetails) {
+        String token = jwtTokenUtil.generateToken(userDetails);
+        Map<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("token", token);
+        tokenMap.put("tokenHead", tokenHead);
+        return tokenMap;
+    }
 
+    /**
+     * 更新security登录用户对象
+     *
+     * @param userDetails
+     */
+    private void updateAuthorities(UserDetails userDetails) {
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+    }
+
+
+    /**
+     * 获取所有操作员
+     *
+     * @param keywords
+     * @return
+     */
+    @Override
+    public List<Admin> getAllAdmins(String keywords) {
+        return adminMapper.getAllAdmins(((Admin) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal()).getId(), keywords);
+    }
+
+    /**
+     * 更新操作员角色
+     * @return
+     * @param adminId
+     * @param rids
+     */
+    @Override
+    @Transactional
+    public RespBean updateAdminRole(Integer adminId, Integer[] rids) {
+        adminRoleMapper.delete(new QueryWrapper<AdminRole>().eq("adminId",adminId));
+        Integer result = adminRoleMapper.updateAdminRole(adminId,rids);
+        if(rids.length == result){
+            return RespBean.success("更新成功！");
+        }
+        return RespBean.error("更新失败，请稍后再试！");
+    }
+
+    /**
+     * 更新用户密码
+     * @param oldPass
+     * @param pass
+     * @param adminId
+     * @return
+     */
+    @Override
+    public RespBean updateAdminPassword(String oldPass, String pass, Integer adminId) {
+        Admin admin = adminMapper.selectById(adminId);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        // 判断旧密码是否正确
+        if (encoder.matches(oldPass,admin.getPassword())) {
+            admin.setPassword(encoder.encode(pass));
+            int result = adminMapper.updateById(admin);
+            if (result == 1) {
+                return RespBean.success("更新成功！");
+            }
+        }
+        return RespBean.error("更新失败，请稍后再试！");
+    }
+
+    /**
+     * 更新用户头像
+     * @param url
+     * @param id
+     * @param authentication
+     * @return
+     */
+    @Override
+    public RespBean updateAdminUserFace(String url, Integer id, Authentication authentication) {
+        Admin admin = adminMapper.selectById(id);
+        admin.setUserFace(url);
+        int result = adminMapper.updateById(admin);
+        if(result == 1){
+            Admin principal = (Admin) authentication.getPrincipal();
+            principal.setUserFace(url);
+            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(
+                    admin,null,authentication.getAuthorities()));
+            return RespBean.success("更新成功!",url);
+        }
+        return RespBean.error("更新失败!");
+    }
 }

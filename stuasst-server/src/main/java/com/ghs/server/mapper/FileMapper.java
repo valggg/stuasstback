@@ -1,24 +1,26 @@
 package com.ghs.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ghs.server.pojo.Role;
+import com.ghs.server.pojo.File;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
  * <p>
- * 角色表 Mapper 接口
+ *  Mapper 接口
  * </p>
  *
  * @author ghs
- * @since 2022-02-17
+ * @since 2022-03-08
  */
 @Mapper
-public interface RoleMapper extends BaseMapper<Role> {
+public interface FileMapper extends BaseMapper<File> {
+
     /**
-     * 根据用户id查询角色列表
+     * 通过用户id查询文件
+     * @param adminId
      * @return
      */
-    List<Role> getRoles(Integer adminId);
+    List<File> getFiles(Integer adminId);
 }
