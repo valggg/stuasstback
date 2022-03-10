@@ -1,6 +1,7 @@
 package com.ghs.server.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -22,9 +23,9 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("s_file")
-@ApiModel(value="File对象", description="")
-public class File implements Serializable {
+@TableName("s_document")
+@ApiModel(value="Document对象", description="")
+public class Document implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -47,5 +48,11 @@ public class File implements Serializable {
     @ApiModelProperty(value = "上传时间")
     private String time;
 
+    @ApiModelProperty(value = "返回结果，供存储过程使用")
+    @TableField(exist = false)
+    private Integer result;
 
+    @ApiModelProperty(value = "返回插入id，供存储过程使用")
+    @TableField(exist = false)
+    private Integer reId;
 }

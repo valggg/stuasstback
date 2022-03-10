@@ -2,6 +2,7 @@ package com.ghs.server.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ghs.server.pojo.RespBean;
+import com.ghs.server.pojo.RespPageBean;
 import com.ghs.server.pojo.Tally;
 
 import java.util.List;
@@ -35,4 +36,11 @@ public interface ITallyService extends IService<Tally> {
      */
     List<Tally> getInAndOutByAdminId(boolean isIncome);
 
+    /**
+     * 分页获取账单
+     * @param currentPage
+     * @param size
+     * @return
+     */
+    RespPageBean getTallyByPage(Integer currentPage, Integer size);
 }

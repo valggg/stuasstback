@@ -1,6 +1,8 @@
 package com.ghs.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ghs.server.pojo.RespBean;
 import com.ghs.server.pojo.Tally;
 import org.apache.ibatis.annotations.Mapper;
@@ -40,4 +42,11 @@ public interface TallyMapper extends BaseMapper<Tally> {
      * @return
      */
     List<Tally> getInAndOut(@Param("adminId") Integer adminId,@Param("isIncome") boolean isIncome);
+
+    /**
+     * 分页获取账单
+     * @param page
+     * @return
+     */
+    IPage<Tally> getTallyByPage(@Param("adminId") Integer adminId,Page<Tally> page);
 }

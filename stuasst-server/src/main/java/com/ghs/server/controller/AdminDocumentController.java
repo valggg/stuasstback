@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/admin-file")
-public class AdminFileController {
+public class AdminDocumentController {
 
 }

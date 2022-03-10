@@ -1,16 +1,14 @@
 package com.ghs.server.controller;
 
 
-import com.ghs.server.pojo.AdminTally;
-import com.ghs.server.pojo.Course;
-import com.ghs.server.pojo.RespBean;
-import com.ghs.server.pojo.Tally;
+import com.ghs.server.pojo.*;
 import com.ghs.server.service.IAdminTallyService;
 import com.ghs.server.service.ITallyService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,6 +33,13 @@ public class TallyController {
     @GetMapping("/tooTally")
     public List<Tally> getTalliesByAdminId(){
         return tallyService.getTallyByAdminId();
+    }
+
+    @ApiOperation(value = "分页获取所有账单")
+    @GetMapping("/")
+    public RespPageBean getTallyByPage(@RequestParam(defaultValue = "1") Integer currentPage,
+                                    @RequestParam(defaultValue = "10") Integer size) {
+        return tallyService.getTallyByPage(currentPage, size);
     }
 
     @ApiOperation(value = "通过用户id查询支出/收入账单")

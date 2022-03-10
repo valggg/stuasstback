@@ -29,6 +29,24 @@
                 t.id = at.tid
         WHERE
             at.adminId = #{adminId}
+        ORDER BY
+            t.date desc
+    </select>
+
+    <!--根据用户id查询账单-->
+    <select id="getTallyByPage" resultType="com.ghs.server.pojo.Tally">
+        SELECT
+            t.*
+        FROM
+            s_tally t
+                LEFT JOIN
+            s_admin_tally at
+        ON
+            t.id = at.tid
+        WHERE
+            at.adminId = #{adminId}
+        ORDER BY
+            t.date desc
     </select>
 
     <!--添加账单-->

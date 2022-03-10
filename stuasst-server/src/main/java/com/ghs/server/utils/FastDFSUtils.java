@@ -36,7 +36,7 @@ public class FastDFSUtils {
      */
     public static String[] upload(MultipartFile file){
         String name = file.getOriginalFilename();
-        logger.info("文件名：",name);
+        logger.info("文件名："+name);
         StorageClient storageClient = null;
         String[] uploadResult = null;
         try {
@@ -142,9 +142,7 @@ public class FastDFSUtils {
         } catch (Exception e) {
             logger.error("文件路径获取失败",e.getMessage());
         }
-        System.out.println();
         System.out.println("结果为:"+storeStorage.getInetSocketAddress());
-        System.out.println();
         return "http://"+storeStorage.getInetSocketAddress().getHostString()+":8888/";
     }
 }

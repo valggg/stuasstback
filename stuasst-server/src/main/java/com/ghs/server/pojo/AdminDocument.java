@@ -22,9 +22,9 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("s_admin_file")
-@ApiModel(value="AdminFile对象", description="")
-public class AdminFile implements Serializable {
+@TableName("s_admin_document")
+@ApiModel(value="AdminDocument对象", description="")
+public class AdminDocument implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,7 @@ public class AdminFile implements Serializable {
     private Integer adminId;
 
     @ApiModelProperty(value = "文件id")
-    private Integer fid;
+    private Integer did;
 
 
 }

@@ -1,5 +1,7 @@
 package com.ghs.server.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ghs.server.mapper.AdminTallyMapper;
 import com.ghs.server.mapper.TallyMapper;
@@ -62,5 +64,21 @@ public class TallyServiceImpl extends ServiceImpl<TallyMapper, Tally> implements
     public List<Tally> getInAndOutByAdminId(boolean isIncome) {
         Integer adminId = ((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         return tallyMapper.getInAndOut(adminId,isIncome);
+    }
+
+    /**
+     * 分页获取账单
+     * @param currentPage
+     * @param size
+     * @return
+     */
+    @Override
+    public RespPageBean getTallyByPage(Integer currentPage, Integer size) {
+        Integer adminId = ((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        //开启分页
+        Page<Tally> page = new Page<>(currentPage, size);
+        IPage<Tally> tallyIPage = tallyMapper.getTallyByPage(adminId,page);
+        RespPageBean respPageBean = new RespPageBean(tallyIPage.getTotal(), tallyIPage.getRecords());
+        return respPageBean;
     }
 }
