@@ -77,6 +77,10 @@ public class TallyController {
     @DeleteMapping("/")
     public RespBean deleteTalliesByIds(Integer[] ids) {
         if(tallyService.removeByIds(Arrays.asList(ids))){
+            for (int i = 0;i <= ids.length-1;i++){
+                adminTallyService.delAdminTallyByTid(ids[i]);
+            }
+
             return RespBean.success("批量删除账单成功！");
         }
         return RespBean.error("批量删除账单失败，请稍后再试！");

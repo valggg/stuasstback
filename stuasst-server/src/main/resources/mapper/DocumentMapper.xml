@@ -43,6 +43,10 @@
                 d.id = ad.did
         WHERE
             ad.adminId=#{adminId}
+        <!-- 不传关键字 查所有 -->
+        <if test="null!=keywords and ''!=keywords">
+            AND d.`name` LIKE CONCAT('%',#{keywords}, '%')
+        </if>
         ORDER BY
             d.id
     </select>

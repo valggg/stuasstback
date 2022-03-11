@@ -7,6 +7,7 @@ import com.ghs.server.mapper.AdminDocumentMapper;
 import com.ghs.server.mapper.DocumentMapper;
 import com.ghs.server.pojo.*;
 import com.ghs.server.service.IDocumentService;
+import javassist.compiler.ast.Keyword;
 import org.csource.fastdfs.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -57,7 +58,7 @@ public class DocumentServiceImpl extends ServiceImpl<DocumentMapper, Document> i
 
         Document document = new Document();
         document.setName(name);
-        document.setType(name.substring(name.lastIndexOf('.'))+"文件");
+        document.setType(name.substring(name.lastIndexOf('.')));
         document.setPath(url);
         document.setSize(size);
         document.setTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(info.getCreateTimestamp()));
@@ -82,10 +83,10 @@ public class DocumentServiceImpl extends ServiceImpl<DocumentMapper, Document> i
      * @return
      */
     @Override
-    public RespPageBean getDocumentByPage(Integer currentPage, Integer size) {
+    public RespPageBean getDocumentByPage(Integer currentPage, Integer size,String keywords) {
         Integer adminId = ((Admin) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         Page<Document> page = new Page<>(currentPage, size);
-        IPage<Document> documentIPage = documentMapper.getDocumentByPage(adminId,page);
+        IPage<Document> documentIPage = documentMapper.getDocumentByPage(adminId,page, keywords);
         RespPageBean respPageBean = new RespPageBean(documentIPage.getTotal(), documentIPage.getRecords());
         return respPageBean;
     }

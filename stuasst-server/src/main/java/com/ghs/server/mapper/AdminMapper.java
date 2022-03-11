@@ -2,6 +2,7 @@ package com.ghs.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ghs.server.pojo.Admin;
+import com.ghs.server.pojo.AdminSignUpParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,4 +25,10 @@ public interface AdminMapper extends BaseMapper<Admin> {
      * @return
      */
     List<Admin> getAllAdmins(@Param("id") Integer id, @Param("keywords") String keywords);
+
+    /**
+     * 注册
+     * @param adminSignUpParam
+     */
+    void signUp(AdminSignUpParam adminSignUpParam);
 }

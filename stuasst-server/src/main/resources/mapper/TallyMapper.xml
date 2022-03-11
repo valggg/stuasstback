@@ -33,7 +33,7 @@
             t.date desc
     </select>
 
-    <!--根据用户id查询账单-->
+    <!--分页查询账单-->
     <select id="getTallyByPage" resultType="com.ghs.server.pojo.Tally">
         SELECT
             t.*

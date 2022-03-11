@@ -40,5 +40,5 @@ public interface IDocumentService extends IService<Document> {
      * @param size
      * @return
      */
-    RespPageBean getDocumentByPage(Integer currentPage, Integer size);
+    RespPageBean getDocumentByPage(Integer currentPage, Integer size, String keywords);
 }

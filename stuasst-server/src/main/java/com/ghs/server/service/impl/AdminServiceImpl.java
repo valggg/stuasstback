@@ -179,6 +179,33 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     }
 
     /**
+     * 注册
+     * @param username
+     * @param password
+     * @return
+     */
+    @Override
+    public RespBean signUp(String username,String password) {
+        AdminSignUpParam adminSignUpParam = new AdminSignUpParam();
+        if (getAdminByUserName(username)==null){
+            adminSignUpParam.setUsername(username);
+            adminSignUpParam.setPassword(new BCryptPasswordEncoder().encode(password));
+            adminSignUpParam.setName(username);
+            adminSignUpParam.setUserFace("http://192.168.194.128:8888/group1/M00/00/00/wKjCgGIqEfeAYZq5AAAT8HUMf-U026.jpg");
+            adminSignUpParam.setEnabled(true);
+            adminMapper.signUp(adminSignUpParam);
+
+            AdminRole adminRole = new AdminRole();
+            adminRole.setAdminId(adminSignUpParam.getReId());
+            adminRole.setRid(2);
+            adminRoleMapper.insert(adminRole);
+            return RespBean.success("注册成功");
+        }else {
+            return RespBean.error(("注册失败，该用户名已存在"));
+        }
+    }
+
+    /**
      * 更新用户密码
      * @param oldPass
      * @param pass

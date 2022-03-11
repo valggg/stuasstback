@@ -16,6 +16,8 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface AdminRoleMapper extends BaseMapper<AdminRole> {
 
+
+
     /**
      * 更新操作员角色
      * @param adminId

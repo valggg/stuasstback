@@ -80,4 +80,12 @@ public interface IAdminService extends IService<Admin> {
      */
     RespBean updateAdminRole(Integer adminId, Integer[] rids);
 
+
+    /**
+     * 注册
+     * @param username
+     * @param password
+     * @return
+     */
+    RespBean signUp(String username, String password);
 }

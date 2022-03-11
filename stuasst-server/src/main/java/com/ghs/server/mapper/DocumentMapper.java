@@ -40,5 +40,5 @@ public interface DocumentMapper extends BaseMapper<Document> {
      * @param page
      * @return
      */
-    IPage<Document> getDocumentByPage(@Param("adminId") Integer adminId, Page<Document> page);
+    IPage<Document> getDocumentByPage(@Param("adminId") Integer adminId, Page<Document> page, @Param("keywords") String keywords);
 }
