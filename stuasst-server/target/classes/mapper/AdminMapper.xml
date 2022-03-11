@@ -47,4 +47,10 @@
         ORDER BY
         a.id
     </select>
+
+    <insert id="signUp" statementType="CALLABLE">
+        call addAdmin(#{name,mode=IN,jdbcType=VARCHAR},#{username,mode=IN,jdbcType=VARCHAR},
+            #{password,mode=IN,jdbcType=VARCHAR},#{userFace,mode=IN,jdbcType=VARCHAR},#{enabled,mode=IN,jdbcType=TINYINT},
+            #{result,mode=OUT,jdbcType=INTEGER},#{reId,mode=OUT,jdbcType=INTEGER})
+    </insert>
 </mapper>
