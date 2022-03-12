@@ -49,12 +49,6 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "图标")
     private String iconCls;
 
-    @ApiModelProperty(value = "是否保持激活")
-    private Boolean keepAlive;
-
-    @ApiModelProperty(value = "是否要求权限")
-    private Boolean requireAuth;
-
     @ApiModelProperty(value = "父id")
     private Integer parentId;
 
