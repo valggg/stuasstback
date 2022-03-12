@@ -45,4 +45,5 @@
     <select id="deleteCourse" statementType="CALLABLE">
         call delCourse(#{id,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
     </select>
+
 </mapper>

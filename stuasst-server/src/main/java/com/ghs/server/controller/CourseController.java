@@ -27,40 +27,10 @@ public class CourseController {
 
     @Autowired
     private ICourseService courseService;
-    @Autowired
-    private ITabService tabService;
+
     @Autowired
     private IAdminCourseService adminCourseService;
 
-    @ApiOperation(value = "通过用户id查询课程表信息")
-    @GetMapping("/tab/{id}")
-    public Tab getTabByAdminId(@PathVariable Integer id){
-        return tabService.getTabByAdminId(id);
-    }
-
-    @ApiOperation(value = "新建课程表")
-    @PostMapping("/tab/")
-    public RespBean addTab(@RequestBody Tab tab){
-        return tabService.addTab(tab);
-    }
-
-    @ApiOperation(value = "删除课程表")
-    @DeleteMapping("/tab/{id}")
-    public RespBean deleteTab(@PathVariable Integer id){
-        if (tabService.removeById(id)) {
-            return RespBean.success("删除成功！");
-        }
-        return RespBean.error("删除失败！");
-    }
-
-    @ApiOperation(value = "更新课程表")
-    @PutMapping("/tab/")
-    public RespBean updateTab(@RequestBody Tab tab){
-        if (tabService.updateById(tab)) {
-            return RespBean.success("更新成功！");
-        }
-        return RespBean.error("更新失败！");
-    }
 
     @ApiOperation(value = "通过用户id查询课程")
     @GetMapping("/showCou")

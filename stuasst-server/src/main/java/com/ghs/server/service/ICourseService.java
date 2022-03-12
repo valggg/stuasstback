@@ -29,10 +29,9 @@ public interface ICourseService extends IService<Course> {
      */
     RespBean addCourse(Course course);
 
-//    /**
-//     * 删除课程
-//     * @param id
-//     * @return
-//     */
-//    RespBean deleteCourse(Integer id);
+    /**
+     * 通过adminId删除课程
+     */
+    void delCourseByAdminId();
+
 }

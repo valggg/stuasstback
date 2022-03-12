@@ -5,6 +5,8 @@ import com.ghs.server.pojo.AdminCourse;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  *  Mapper 接口
@@ -27,4 +29,15 @@ public interface AdminCourseMapper extends BaseMapper<AdminCourse> {
      * @param cid
      */
     void delAdminCourseByCid(Integer cid);
+
+    /**
+     * 根据AdminId用户-课程关系
+     * @param adminId
+     */
+    void delCoursesByAdminId(Integer adminId);
+
+    /**
+     * 查找所有
+     */
+    List<AdminCourse> findAll();
 }

@@ -20,4 +20,8 @@ public interface IAdminCourseService extends IService<AdminCourse> {
      * @return
      */
     void delAdminCourseByCid(Integer cid);
+    /**
+     * 据课程adminId删除用户-课程关系
+     */
+    void delCoursesByAdminId();
 }

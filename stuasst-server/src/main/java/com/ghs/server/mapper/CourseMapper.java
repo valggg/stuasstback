@@ -30,10 +30,6 @@ public interface CourseMapper extends BaseMapper<Course> {
      */
     void addCourse(Course course);
 
-//    /**
-//     * 删除课程
-//     * @param course
-//     */
-//    void deleteCourse(Course course);
+
 
 }

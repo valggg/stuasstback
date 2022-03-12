@@ -14,11 +14,19 @@
         id, adminId, cid
     </sql>
 
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT * FROM s_admin_course
+    </select>
+
     <insert id="addAdminCourse" parameterType="AdminCourse" useGeneratedKeys="true" keyProperty="id">
         insert into s_admin_course(adminId, cid) values(#{adminId}, #{cid})
     </insert>
 
     <delete id="delAdminCourseByCid" >
         DELETE FROM s_admin_course WHERE cid=#{cid}
+    </delete>
+
+    <delete id="delCoursesByAdminId">
+        DELETE FROM s_admin_course WHERE adminId=#{adminId}
     </delete>
 </mapper>
