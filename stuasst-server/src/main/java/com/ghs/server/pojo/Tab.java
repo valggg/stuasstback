@@ -45,7 +45,7 @@ public class Tab implements Serializable {
     private String everyTimes;
 
     @ApiModelProperty(value = "用户id")
-    private String adminId;
+    private Integer adminId;
 
     @ApiModelProperty(value = "返回结果，供存储过程使用")
     @TableField(exist = false)

@@ -24,7 +24,7 @@
     <select id="addTab" statementType="CALLABLE">
         call addTab(#{beginDate,mode=IN,jdbcType=VARCHAR},#{allWeek,mode=IN,jdbcType=VARCHAR},
             #{allTime,mode=IN,jdbcType=VARCHAR},#{everyTimes,mode=IN,jdbcType=VARCHAR},
-            #{adminId,mode=IN,jdbcType=VARCHAR},#{result,mode=OUT,jdbcType=INTEGER})
+            #{adminId,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
     </select>
 
     <select id="deleteTab" statementType="CALLABLE">
